@@ -6,28 +6,12 @@ import LearnerDetail from "../models/learnerRequest.model.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 
-
 const cookieOptions = {
   httpOnly: true,
-
-  secure:
-    process.env.NODE_ENV ===
-    "production",
-
-  sameSite:
-    process.env.NODE_ENV ===
-    "production"
-      ? "none"
-      : "lax",
-
+  secure: true,
+  sameSite: "none",
   path: "/",
-
-  maxAge:
-    7 *
-    24 *
-    60 *
-    60 *
-    1000,
+  maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
 export const sendOtp = asyncHandler(async (req, res) => {
@@ -78,11 +62,7 @@ export const verifyOtp = asyncHandler(async (req, res) => {
       },
     );
 
-   res.cookie(
-  "token",
-  token,
-  cookieOptions
-);
+    res.cookie("token", token, cookieOptions);
   }
 
   return res.status(200).json({
@@ -110,19 +90,13 @@ export const createTutorProfile = asyncHandler(async (req, res) => {
     },
   );
 
-  res.cookie(
-  "token",
-  token,
-  cookieOptions
-);
+  res.cookie("token", token, cookieOptions);
 
   return res.status(201).json({
     success: true,
     tutor,
   });
 });
-
-
 
 export const getNearbyRequests = asyncHandler(async (req, res) => {
   const { lng, lat } = req.query;
@@ -259,19 +233,10 @@ export const getLeaderboard = asyncHandler(async (req, res) => {
   });
 });
 export const logout = asyncHandler(async (req, res) => {
-  res.clearCookie("token", {
+res.clearCookie("token", {
   httpOnly: true,
-
-  secure:
-    process.env.NODE_ENV ===
-    "production",
-
-  sameSite:
-    process.env.NODE_ENV ===
-    "production"
-      ? "none"
-      : "lax",
-
+  secure: true,
+  sameSite: "none",
   path: "/",
 });
 

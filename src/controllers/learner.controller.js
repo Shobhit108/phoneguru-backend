@@ -9,28 +9,11 @@ import Session from "../models/session.model.js";
 
 const cookieOptions = {
   httpOnly: true,
-
-  secure:
-    process.env.NODE_ENV ===
-    "production",
-
-  sameSite:
-    process.env.NODE_ENV ===
-    "production"
-      ? "none"
-      : "lax",
-
+  secure: true,
+  sameSite: "none",
   path: "/",
-
-  maxAge:
-    7 *
-    24 *
-    60 *
-    60 *
-    1000,
+  maxAge: 7 * 24 * 60 * 60 * 1000,
 };
-
-
 export const sendOtp = asyncHandler(async (req, res) => {
   const { phone } = req.body;
 
@@ -78,11 +61,7 @@ export const verifyOtp = asyncHandler(async (req, res) => {
       },
     );
 
-   res.cookie(
-  "token",
-  token,
-  cookieOptions
-);
+    res.cookie("token", token, cookieOptions);
     return res.status(200).json({
       success: true,
       message: "Login successful",
@@ -105,11 +84,7 @@ export const verifyOtp = asyncHandler(async (req, res) => {
     },
   );
 
- res.cookie(
-  "token",
-  token,
-  cookieOptions
-);
+  res.cookie("token", token, cookieOptions);
   return res.status(200).json({
     success: true,
     message: "OTP verified",
@@ -178,17 +153,8 @@ export const getLearnerDashboard = asyncHandler(async (req, res) => {
 export const logout = asyncHandler(async (req, res) => {
  res.clearCookie("token", {
   httpOnly: true,
-
-  secure:
-    process.env.NODE_ENV ===
-    "production",
-
-  sameSite:
-    process.env.NODE_ENV ===
-    "production"
-      ? "none"
-      : "lax",
-
+  secure: true,
+  sameSite: "none",
   path: "/",
 });
 
