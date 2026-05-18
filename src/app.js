@@ -44,14 +44,26 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      process.env.FRONTEND_URL,
-    ],
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        "http://localhost:5173",
+        process.env.FRONTEND_URL,
+      ];
+
+      if (
+        !origin ||
+        allowedOrigins.includes(origin)
+      ) {
+        callback(null, true);
+      } else {
+        callback(
+          new Error("Not allowed by CORS")
+        );
+      }
+    },
     credentials: true,
   }),
 );
-
 // routes
 
 app.use("/api/v1/learner", learnerRoutes);
