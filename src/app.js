@@ -17,8 +17,9 @@ import errorMiddleware from "./middleware/errorMiddleware.js";
 
 const app = express();
 
-// security middlewares
+app.set("trust proxy", 1);
 
+// security middlewares
 app.use(helmet());
 
 const limiter = rateLimit({
@@ -50,15 +51,10 @@ app.use(
         process.env.FRONTEND_URL,
       ];
 
-      if (
-        !origin ||
-        allowedOrigins.includes(origin)
-      ) {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(
-          new Error("Not allowed by CORS")
-        );
+        callback(new Error("Not allowed by CORS"));
       }
     },
     credentials: true,
