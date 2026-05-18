@@ -20,7 +20,7 @@ const app = express();
 app.set("trust proxy", 1);
 
 // security middlewares
-app.use(helmet());
+// app.use(helmet());
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -45,18 +45,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      const allowedOrigins = [
-        "http://localhost:5173",
-        process.env.FRONTEND_URL,
-      ];
-
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   }),
 );
