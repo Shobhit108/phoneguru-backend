@@ -13,6 +13,7 @@ const cookieOptions = {
   sameSite: "none",
   path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000,
+  partitioned: true,
 };
 export const sendOtp = asyncHandler(async (req, res) => {
   const { phone } = req.body;
