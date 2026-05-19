@@ -152,12 +152,13 @@ export const getLearnerDashboard = asyncHandler(async (req, res) => {
 });
 
 export const logout = asyncHandler(async (req, res) => {
- res.clearCookie("token", {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  path: "/",
-});
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",
+    partitioned: true,
+  });
 
   return res.status(200).json({
     success: true,

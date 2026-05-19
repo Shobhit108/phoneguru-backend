@@ -12,6 +12,7 @@ const cookieOptions = {
   sameSite: "none",
   path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000,
+  partitioned: true,
 };
 
 export const sendOtp = asyncHandler(async (req, res) => {
@@ -233,11 +234,13 @@ export const getLeaderboard = asyncHandler(async (req, res) => {
   });
 });
 export const logout = asyncHandler(async (req, res) => {
-res.clearCookie("token", {
+
+  res.clearCookie("token", {
   httpOnly: true,
   secure: true,
   sameSite: "none",
   path: "/",
+  partitioned: true,
 });
 
   return res.status(200).json({
