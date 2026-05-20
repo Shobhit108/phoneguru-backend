@@ -6,10 +6,9 @@ export const tutorSchema =
       .trim()
       .required(),
 
-    phone: Joi.string()
-      .pattern(
-        /^[0-9]{10}$/
-      )
+  phone: Joi.string()
+  .pattern(/^[6-9]\d{9}$/)
+  .allow("", null)
       .required(),
 
     skills:

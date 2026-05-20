@@ -4,9 +4,9 @@ export const learnerSchema =
   Joi.object({
     name: Joi.string().required(),
 
-    phone: Joi.string()
-      .pattern(/^[0-9]{10}$/)
-      .allow("", null),
+   phone: Joi.string()
+  .pattern(/^[6-9]\d{9}$/)
+  .required(),
 
     isSelfLearner:
       Joi.boolean().required(),
